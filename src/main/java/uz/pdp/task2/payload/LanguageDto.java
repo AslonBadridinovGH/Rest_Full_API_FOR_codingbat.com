@@ -7,7 +7,7 @@ import java.util.List;
 @Data
 public class LanguageDto {
 
-   @NotNull(message = "Language name bösh bölmasin")
+   @NotNull(message = "Language name must be not empty")
    private String name;
 
    private List<Integer> categoryIds;

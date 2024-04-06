@@ -17,7 +17,7 @@ public class Category {
     private Integer  id;
 
     @Column(nullable = false)
-    @NotNull(message = "Category name bösh bölmasin ")
+    @NotNull(message = "Category name must be not empty")
     private String   name;
 
     private String   description;

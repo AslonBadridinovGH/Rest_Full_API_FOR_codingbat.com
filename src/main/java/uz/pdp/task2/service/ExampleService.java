@@ -26,11 +26,12 @@ public class ExampleService {
         Example example=new Example();
         example.setText(exampleDto.getText());
         Optional<Task> optionalTask = taskRepository.findById(exampleDto.getTaskId());
-        if (!optionalTask.isPresent())
-        return new ApiResponse("Task not found",false);
+        if (!optionalTask.isPresent()){
+            return new ApiResponse("Task was not found",false);
+        }
         example.setTask(optionalTask.get());
         exampleRepository.save(example);
-        return new ApiResponse("Example saved",true);
+        return new ApiResponse("Example was saved",true);
     }
 
     public List<Example> getExamples() {
@@ -46,25 +47,27 @@ public class ExampleService {
     public ApiResponse editExample(ExampleDto exampleDto, Integer id) {
 
         Optional<Example> optionalExample = exampleRepository.findById(id);
-        if (!optionalExample.isPresent())
-        return new ApiResponse("Task not found",false);
+        if (!optionalExample.isPresent()){
+            return new ApiResponse("Task was not found",false);
+        }
 
         Example example = optionalExample.get();
         example.setText(exampleDto.getText());
 
         Optional<Task> optionalTask = taskRepository.findById(exampleDto.getTaskId());
-        if (!optionalTask.isPresent())
-        return new ApiResponse("Task not found",false);
+        if (!optionalTask.isPresent()){
+            return new ApiResponse("Task was not found",false);
+        }
         example.setTask(optionalTask.get());
         exampleRepository.save(example);
-        return new ApiResponse("example edited",true);
+        return new ApiResponse("example was edited",true);
     }
 
     public ApiResponse deleteExample(Integer id) {
         try {
             exampleRepository.deleteById(id);
-            return new ApiResponse("example deleted",true);
+            return new ApiResponse("example was deleted",true);
         }catch (Exception e){
-        return new ApiResponse("example not deleted",false);
+        return new ApiResponse("example was not deleted",false);
     }}
 }

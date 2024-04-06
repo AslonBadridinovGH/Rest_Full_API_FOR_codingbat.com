@@ -17,7 +17,7 @@ public class CategoryService {
     public ApiResponse addCategory(Category category) {
 
         categoryRepository.save(category);
-        return new ApiResponse("Category saved",true);
+        return new ApiResponse("Category was saved",true);
     }
 
     public List<Category> getCategories(){
@@ -32,22 +32,23 @@ public class CategoryService {
     public ApiResponse editCategory(Category category, Integer id) {
 
         Optional<Category> optionalCategory = categoryRepository.findById(id);
-        if (!optionalCategory.isPresent())
-        return new ApiResponse("Category not found",false);
+        if (!optionalCategory.isPresent()){
+            return new ApiResponse("Category was not found",false);
+        }
         Category category1 = optionalCategory.get();
         category1.setName(category.getName());
         category1.setDescription(category.getDescription());
         categoryRepository.save(category1);
-        return new ApiResponse("Category edited",true);
+        return new ApiResponse("Category was edited",true);
     }
 
     public ApiResponse deleteCategory(Integer id) {
        try {
            categoryRepository.deleteById(id);
-           return new ApiResponse("Category deleted",true);
+           return new ApiResponse("Category was deleted",true);
        }catch (Exception e){
-           return new ApiResponse("Category not deleted",false);
+           return new ApiResponse("Category was not deleted",false);
        }
-
     }
+    
 }

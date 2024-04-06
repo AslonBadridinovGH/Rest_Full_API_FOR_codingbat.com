@@ -39,7 +39,7 @@ public class CategoryController {
     }
 
     @PutMapping("/api/category/{id}")
-    public ResponseEntity<ApiResponse> editCategory(@Valid @RequestBody Category category,@PathVariable Integer id){
+    public ResponseEntity<ApiResponse> editCategory(@Valid @RequestBody Category category, @PathVariable Integer id){
         ApiResponse apiResponse = categoryService.editCategory(category,id);
         return ResponseEntity.status(apiResponse.isSuccess()?HttpStatus.ACCEPTED:HttpStatus.CONFLICT).body(apiResponse);
     }
@@ -52,7 +52,7 @@ public class CategoryController {
 
 
 
-    // "status": 400, "error": "Bad Request" BÖLSA SHU YERGA TUSHADI
+    // "status": 400, "error": "Bad Request"
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex){

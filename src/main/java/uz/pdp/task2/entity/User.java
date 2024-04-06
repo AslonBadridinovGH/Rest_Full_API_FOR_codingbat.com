@@ -15,7 +15,7 @@ public class User {
     private Integer id;
 
     @Column(nullable = false,unique = true)
-    @NotNull(message = "Email bösh bölmasin")
+    @NotNull(message = "Email must be not empty")
     private String email;
 
     private String password;

@@ -40,7 +40,7 @@ public class AnswerController {
     }
 
     @PutMapping("/api/answer/{id}")
-    public ResponseEntity<ApiResponse> editAnswer(@Valid @RequestBody AnswerDto answerDto,@PathVariable Integer id){
+    public ResponseEntity<ApiResponse> editAnswer(@Valid @RequestBody AnswerDto answerDto, @PathVariable Integer id){
         ApiResponse apiResponse = answerService.editAnswer(answerDto,id);
         return ResponseEntity.status(apiResponse.isSuccess()?HttpStatus.ACCEPTED:HttpStatus.CONFLICT).body(apiResponse);
     }
@@ -51,8 +51,7 @@ public class AnswerController {
         return ResponseEntity.status(apiResponse.isSuccess()?HttpStatus.ACCEPTED:HttpStatus.CONFLICT).body(apiResponse);
     }
 
-
-    // "status": 400, "error": "Bad Request" BÖLSA SHU YERGA TUSHADI
+    // in case of:  "status": 400, OR  "error": "Bad Request"
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex){
@@ -63,8 +62,6 @@ public class AnswerController {
             String errorMessage = error.getDefaultMessage();
             errors.put(fieldName, errorMessage);
         });
-        return errors;
+         return errors;
     }
-
-
 }

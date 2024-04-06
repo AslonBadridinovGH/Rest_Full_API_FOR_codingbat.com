@@ -34,15 +34,15 @@ public class AnswerService {
 
         Optional<Task> optionalTask = taskRepository.findById(answerDto.getTaskId());
         if (!optionalTask.isPresent())
-            return new ApiResponse("Task not found",false);
+            return new ApiResponse("Task was not found",false);
         answer.setTask(optionalTask.get());
 
         Optional<User> optionalUser = userRepository.findById(answerDto.getUserId());
         if (!optionalUser.isPresent())
-            return new ApiResponse("User not found",false);
+            return new ApiResponse("User was not found",false);
         answer.setUser(optionalUser.get());
         answerRepository.save(answer);
-        return new ApiResponse("Answer saved",true);
+        return new ApiResponse("Answer was saved",true);
     }
 
     public List<Answer> getAnswers() {
@@ -59,27 +59,27 @@ public class AnswerService {
 
         Optional<Answer> optionalAnswer = answerRepository.findById(id);
         if (!optionalAnswer.isPresent())
-            return new ApiResponse("Answer not found",false);
+            return new ApiResponse("Answer was not found",false);
         Answer answer = optionalAnswer.get();
         answer.setText(answerDto.getText());
         answer.set_correct(answerDto.is_correct());
         Optional<Task> optionalTask = taskRepository.findById(answerDto.getTaskId());
         if (!optionalTask.isPresent())
-            return new ApiResponse("Task not found",false);
+            return new ApiResponse("Task was not found",false);
         answer.setTask(optionalTask.get());
         Optional<User> optionalUser = userRepository.findById(answerDto.getUserId());
         if (!optionalUser.isPresent())
-            return new ApiResponse("User not found",false);
+            return new ApiResponse("User was not found",false);
         answer.setUser(optionalUser.get());
         answerRepository.save(answer);
-        return new ApiResponse("Answer edited",true);
+        return new ApiResponse("Answer was edited",true);
     }
     public ApiResponse deleteAnswer(Integer id) {
         try {
             answerRepository.deleteById(id);
-            return new ApiResponse("Answer deleted",true);
+            return new ApiResponse("Answer was deleted",true);
         }catch (Exception e){
-            return new ApiResponse("Answer not deleted",false);
+            return new ApiResponse("Answer was not deleted",false);
     }
 }
 }

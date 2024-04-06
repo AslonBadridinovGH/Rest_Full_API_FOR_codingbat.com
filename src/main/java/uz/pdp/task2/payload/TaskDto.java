@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 @Data
 public class TaskDto {
 
-    @NotNull(message = "Email bösh bölmasin")
+    @NotNull(message = "Email must be not empty")
     private String   name;
 
     private String   text;

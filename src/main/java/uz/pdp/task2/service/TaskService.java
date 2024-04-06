@@ -31,11 +31,12 @@ public class TaskService {
         task.setText(taskDto.getText());
 
         Optional<Language> optionalLanguage = languageRepository.findById(taskDto.getLanguageId());
-        if (!optionalLanguage.isPresent())
-        return new ApiResponse("Language not found",false);
+        if (!optionalLanguage.isPresent()) {
+            return new ApiResponse("Language was not found",false);
+        }
         task.setLanguage(optionalLanguage.get());
         taskRepository.save(task);
-        return new ApiResponse("Task saved",true);
+        return new ApiResponse("Task was saved",true);
     }
 
     public List<Task> getTasks() {
@@ -51,8 +52,9 @@ public class TaskService {
     public ApiResponse editTask(TaskDto taskDto, Integer id) {
 
         Optional<Task> optionalTask = taskRepository.findById(id);
-        if (!optionalTask.isPresent())
-        return new ApiResponse("Task not found",false);
+        if (!optionalTask.isPresent()) {
+            return new ApiResponse("Task wasn't found",false);
+        }
 
         Task task = optionalTask.get();
         task.setHasStar(taskDto.isHasStar());
@@ -64,19 +66,19 @@ public class TaskService {
 
         Optional<Language> optionalLanguage = languageRepository.findById(taskDto.getLanguageId());
         if (!optionalLanguage.isPresent())
-            return new ApiResponse("Language not found",false);
+            return new ApiResponse("Language wasn't found",false);
         task.setLanguage(optionalLanguage.get());
         taskRepository.save(task);
-        return new ApiResponse("Task edited",true);
+        return new ApiResponse("Task was edited",true);
     }
 
     public ApiResponse deleteTask(Integer id) {
 
         try {
             languageRepository.deleteById(id);
-            return new ApiResponse("Task deleted",true);
+            return new ApiResponse("Task was deleted",true);
         }catch (Exception e){
-            return new ApiResponse("Task not deleted",false);
+            return new ApiResponse("Task wasn't deleted",false);
         }
 }
 }

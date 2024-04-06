@@ -16,12 +16,12 @@ public class UserService {
     public ApiResponse addUser(User user) {
         boolean exists = userRepository.existsByEmail(user.getEmail());
         if (exists)
-            return new ApiResponse("Such Email already exist",false);
+            return new ApiResponse("Such Email is already exist",false);
         User user1=new User();
         user1.setEmail(user.getEmail());
         user1.setPassword(user.getPassword());
         userRepository.save(user1);
-        return new ApiResponse("User added",true);
+        return new ApiResponse("User was added",true);
     }
 
     public List<User> getUsers() {
@@ -32,32 +32,33 @@ public class UserService {
     public User getUserById(Integer id) {
 
         Optional<User> optionalUser = userRepository.findById(id);
-        // return optionalUser.orElseGet(User::new);
-        return optionalUser.orElse(null);
+         return optionalUser.orElseGet(User::new);
+        // return optionalUser.orElse(null);
     }
 
     public ApiResponse editUser(User user, Integer id) {
 
         boolean exists = userRepository.existsByEmailAndIdNot(user.getEmail(), id);
-        if (exists)
-        return new ApiResponse("Such Email already exist",false);
+        if (exists) {
+            return new ApiResponse("Such Email is already exist",false);
+        }
 
         Optional<User> optionalUser = userRepository.findById(id);
         if (!optionalUser.isPresent())
-            return new ApiResponse("User not found",false);
+            return new ApiResponse("User was not found",false);
         User user1 = optionalUser.get();
         user1.setPassword(user.getEmail());
         user1.setPassword(user.getPassword());
         userRepository.save(user1);
-        return new ApiResponse("User edited",true);
+        return new ApiResponse("User was edited",true);
     }
 
     public ApiResponse deleteUser(Integer id) {
         try {
             userRepository.deleteById(id);
-            return new ApiResponse("User deleted",true);
+            return new ApiResponse("User was deleted",true);
         }catch (Exception e){
-            return new ApiResponse("User not deleted",false);
+            return new ApiResponse("User was not deleted",false);
 
     }
     }

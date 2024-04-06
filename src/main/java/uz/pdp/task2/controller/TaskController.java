@@ -57,9 +57,7 @@ public class TaskController {
     }
 
 
-
-
-    // "status": 400, "error": "Bad Request" BÖLSA SHU YERGA TUSHADI
+    // "status": 400, "error": "Bad Request"
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex){

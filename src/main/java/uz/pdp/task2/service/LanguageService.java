@@ -33,18 +33,18 @@ public class LanguageService {
         List<Integer> categoryIds = languageDto.getCategoryIds();
         for (Integer categoryId : categoryIds) {
             Optional<Category> optionalCategory = categoryRepository.findById(categoryId);
-        if (!optionalCategory.isPresent())
-            return new ApiResponse(categoryId+"  CategoryId not found",false);
+        if (!optionalCategory.isPresent()){
+            return new ApiResponse(categoryId+"  CategoryId was not found",false);
+        }
             categories.add(optionalCategory.get());
-     }
+        }
         language.setCategory(categories);
         languageRepository.save(language);
         return new ApiResponse("Language saved",true);
     }
 
     public List<Language> getLanguage() {
-        List<Language> languageList = languageRepository.findAll();
-        return languageList;
+        return languageRepository.findAll();
     }
 
     public Language getLanguageById(Integer id) {
@@ -55,30 +55,30 @@ public class LanguageService {
     public ApiResponse editLanguage(LanguageDto languageDto, Integer id) {
 
         Optional<Language> optionalLanguage = languageRepository.findById(id);
-        if (!optionalLanguage.isPresent())
-        return new ApiResponse("Language not found",false);
+        if (!optionalLanguage.isPresent()){
+            return new ApiResponse("Language was not found",false);
+        }
         Language language = optionalLanguage.get();
         language.setName(languageDto.getName());
 
-
-        Set<Category> categories = language.getCategory();
+         Set<Category> categories = language.getCategory();
         List<Integer> categoryIds = languageDto.getCategoryIds();
         for (Integer categoryId : categoryIds) {
             Optional<Category> optionalCategory = categoryRepository.findById(categoryId);
             if (!optionalCategory.isPresent())
-                return new ApiResponse(categoryId+"  CategoryId not found",false);
+                return new ApiResponse(categoryId+"  CategoryId was not found",false);
             categories.add(optionalCategory.get());
         }
         language.setCategory(categories);
         languageRepository.save(language);
-        return new ApiResponse("Category edited",true);
+        return new ApiResponse("Category was edited",true);
     }
 
     public ApiResponse deleteLanguage(Integer id) {
         try {
             languageRepository.deleteById(id);
-         return new ApiResponse("Category deleted",true);
+         return new ApiResponse("Category was deleted",true);
         }catch (Exception e){
-        return new ApiResponse("Category not deleted",false);
+        return new ApiResponse("Category was not deleted",false);
     }}
 }

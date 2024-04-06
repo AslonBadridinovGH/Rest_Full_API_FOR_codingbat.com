@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>uz.pdp</groupId>
-    <artifactId>Task2</artifactId>
+    <artifactId>com</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>Task2</name>
     <description>Task2</description>

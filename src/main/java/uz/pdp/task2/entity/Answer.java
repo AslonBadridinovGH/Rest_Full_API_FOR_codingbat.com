@@ -10,6 +10,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 public class Answer {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -19,9 +20,9 @@ public class Answer {
     private boolean is_correct;
 
     @ManyToOne
-    private Task    task;
+    private Task  task;
 
     @ManyToOne
-    private User    user;
+    private User  user;
 
 }
